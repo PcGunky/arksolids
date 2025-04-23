@@ -58,44 +58,44 @@ export const CustomDomainModal: React.FC<{ onClose: () => void }> = ({ onClose }
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+      <div className="bg-[#111111] rounded-lg p-6 max-w-md w-full mx-4 border border-gray-800">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-semibold">Set Custom Domain</h3>
+          <h3 className="text-xl font-semibold text-white">Set Custom Domain</h3>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded-full"
+            className="p-1 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white"
           >
             <X size={20} />
           </button>
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-300 mb-2">
             Custom Domain
           </label>
           <div className="flex items-center">
-            <span className="text-gray-500 mr-2">/share/</span>
+            <span className="text-gray-400 mr-2">/share/</span>
             <input
               type="text"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               placeholder="your-domain"
-              className="flex-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded-md text-gray-200 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-gray-400">
             Only letters, numbers, and hyphens are allowed
           </p>
           {error && (
-            <p className="mt-2 text-sm text-red-600">{error}</p>
+            <p className="mt-2 text-sm text-red-400">{error}</p>
           )}
         </div>
 
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded-md hover:bg-gray-50"
+            className="px-4 py-2 bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700"
           >
             Cancel
           </button>

@@ -16,7 +16,6 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
   const [colorCheck, setColorCheck] = useState('');
   const [missingColors, setMissingColors] = useState<string[]>([]);
 
-  // Reset states when category changes
   useEffect(() => {
     setColorFilter('');
     setColorCheck('');
@@ -47,17 +46,17 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+    <div className="bg-[#111111] rounded-lg p-4 sm:p-6">
       <div className="flex justify-between items-center mb-4 sm:mb-6">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold">{dino.name}</h2>
-          <p className="text-gray-600 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-white">{dino.name}</h2>
+          <p className="text-gray-400 mt-1">
             {selectedCategory.name} - Colors: {colorCount}/254
           </p>
         </div>
         <button
           onClick={() => setShowFilter(!showFilter)}
-          className="p-2 hover:bg-gray-100 rounded-full"
+          className="p-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white"
           title="Filter Images"
         >
           <SlidersHorizontal size={20} />
@@ -66,12 +65,12 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
 
       <div className="mb-4 sm:mb-6 space-y-4">
         {showFilter && (
-          <div className="p-4 bg-gray-50 rounded-lg">
+          <div className="p-4 bg-[#0A0A0A] rounded-lg">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search by Color ID..."
-                className="w-full pl-10 pr-4 py-2 border rounded-lg"
+                className="w-full pl-10 pr-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-gray-200"
                 value={colorFilter}
                 onChange={(e) => setColorFilter(e.target.value)}
               />
@@ -84,7 +83,7 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
           <input
             type="text"
             placeholder="Check colors (e.g., 53,64,84,165)"
-            className="flex-1 px-4 py-2 border rounded-lg"
+            className="flex-1 px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg text-gray-200"
             value={colorCheck}
             onChange={(e) => setColorCheck(e.target.value)}
           />

@@ -111,13 +111,13 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+      <div className="bg-[#111111] rounded-lg p-6 w-full max-w-2xl border border-gray-800">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-semibold">Upload Images</h3>
+          <h3 className="text-xl font-semibold text-white">Upload Images</h3>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-gray-100 rounded-full"
+            className="p-1 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white"
           >
             <X size={20} />
           </button>
@@ -130,19 +130,19 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
             multiple
             accept="image/png,image/jpeg"
             onChange={handleFileSelect}
-            className="mb-2"
+            className="text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-800 file:text-gray-300 hover:file:bg-gray-700"
           />
           {error && (
-            <p className="text-red-500 text-sm">{error}</p>
+            <p className="text-red-400 text-sm mt-2">{error}</p>
           )}
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-400 mt-1">
             Supported formats: PNG, JPG (Max size: 1MB per image)
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 max-h-96 overflow-y-auto mb-4">
           {selectedFiles.map((file) => (
-            <div key={file.name} className="border rounded-lg p-4">
+            <div key={file.name} className="border border-gray-800 rounded-lg p-4 bg-gray-900">
               <img
                 src={URL.createObjectURL(file)}
                 alt={file.name}
@@ -151,9 +151,9 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
               <input
                 type="text"
                 placeholder="Color ID (e.g., 123 or Red)"
-                className={`w-full px-3 py-2 border rounded-md ${
-                  !colors[file.name] ? 'border-red-300' : ''
-                }`}
+                className={`w-full px-3 py-2 bg-gray-800 border rounded-md text-gray-200 placeholder-gray-500 ${
+                  !colors[file.name] ? 'border-red-500' : 'border-gray-700'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 value={colors[file.name]}
                 onChange={(e) =>
                   setColors((prev) => ({
@@ -170,7 +170,7 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 border rounded-md hover:bg-gray-50"
+            className="px-4 py-2 bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700"
             disabled={uploading}
           >
             Cancel

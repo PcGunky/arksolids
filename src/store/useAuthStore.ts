@@ -27,7 +27,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
         .from('user_domains')
         .select('domain')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
       
       if (data) {
         set({ customDomain: data.domain });

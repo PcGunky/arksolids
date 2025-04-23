@@ -14,31 +14,31 @@ export const CategoryList: React.FC<CategoryListProps> = ({ dino, onSelectCatego
   const [uploadCategory, setUploadCategory] = useState<string | null>(null);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1">
       {dino.categories.map((category) => (
         <div
           key={category.id}
-          className="flex items-center justify-between p-2 bg-gray-50 rounded-md"
+          className="flex items-center justify-between p-2 bg-gray-900 rounded-md group"
         >
-          <span className="text-sm font-medium">{category.name}</span>
-          <div className="flex gap-2">
+          <span className="text-sm text-gray-300">{category.name}</span>
+          <div className="flex gap-1">
             <button
               onClick={() => setUploadCategory(category.id)}
-              className="flex items-center gap-1 px-2 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded-md"
+              className="p-1 text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded"
               title="Upload Images"
             >
               <Upload size={16} />
             </button>
             <button
               onClick={() => onSelectCategory(dino, category)}
-              className="flex items-center gap-1 px-2 py-1 text-sm text-green-600 hover:bg-green-50 rounded-md"
+              className="p-1 text-gray-400 hover:text-green-400 hover:bg-gray-700 rounded"
               title="View Category"
             >
               <Eye size={16} />
             </button>
             <button
               onClick={() => removeCategory(dino.id, category.id)}
-              className="flex items-center gap-1 px-2 py-1 text-sm text-red-600 hover:bg-red-50 rounded-md"
+              className="p-1 text-gray-400 hover:text-red-400 hover:bg-gray-700 rounded"
               title="Remove Category"
             >
               <Trash2 size={16} />
