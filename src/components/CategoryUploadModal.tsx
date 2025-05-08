@@ -3,7 +3,6 @@ import { X } from 'lucide-react';
 import { DinoImage } from '../types/dino';
 import { uploadImage } from '../lib/storage';
 import { useAuthStore } from '../store/useAuthStore';
-import { useDinoStore } from '../store/useDinoStore';
 
 const MAX_FILE_SIZE = 1024 * 1024; // 1MB in bytes
 
@@ -32,7 +31,9 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
       
       // Check file types and sizes
       const invalidFiles = files.filter(file => {
-        const isValidType = file.type === 'image/png' || file.type === 'image/jpeg';
+        const isValidType = file.type === 'image/png' || 
+                          file.type === 'image/jpeg' || 
+                          file.type === 'image/jpg';
         const isValidSize = file.size <= MAX_FILE_SIZE;
         return !isValidType || !isValidSize;
       });
@@ -128,7 +129,7 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
             ref={fileInputRef}
             type="file"
             multiple
-            accept="image/png,image/jpeg"
+            accept="image/png,image/jpeg,image/jpg"
             onChange={handleFileSelect}
             className="text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-800 file:text-gray-300 hover:file:bg-gray-700"
           />

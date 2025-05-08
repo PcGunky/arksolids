@@ -21,8 +21,7 @@ interface DinoStore {
 
 const createMasterList = (): Dino[] => {
   const dinoNames = [
-    'Achatina', 'Allosaurus', 'Amargasaurus', 'Andrewsarchus', 'Anglerfish', 'Ankylosaurus', 'Archaeopteryx', 'Argentavis', 'Arthropluera', 'Astrocetus', 'Astrodelphis', 'Baryonyx', 'Basilosaurus', 'Beelzebufo', 'Bloodstalker', 'Brontosaurus', 'Carnotaurus', 'Carbonemys', 'Castoroides', 'Carcharodontosaurus', 'Ceratosaurus', 'Chadlicotherium', 'Cnidaria', 'Compy', 'Cosmo', 'Daeodon', 'Deinosuchus', 'Deinonychus', 'Desmodus', 'Dimetrodon', 'Dimorphodon', 'Dinopithecus', 'Dilophosaur', 'Diplocaulus', 'Diplodocus', 'Dire Bear', 'Direwolf', 'Dodo', 'Doedicurus', 'Dunkleosteus', 'Dung Beetle', 'Electrophorus', 'Equus', 'Fasolasuchus', 'Featherlight', 'Fenrir', 'Ferox', 'Fjordhawk', 'Gacha', 'Gasbags', 'Gigantopithecus', 'Gigantoraptor', 'Giganotosaurus', 'Glowtail', 'Griffin', 'Hesperornis', 'Ichthyornis', 'Ichthyosaurus', 'Iguanodon', 'Kairuku', 'Kaprosuchus', 'Karkinos', 'Kentrosaurus', 'Leedsichthys', 'Liopleurodon', 'Lymantria', 'Lystrosaurus', 'Maewing', 'Magmasaur', 'Mammoth', 'Managarmr', 'Mantis', 'Megachelon', 'Megalosaurus', 'Megalania', 'Megaloceros', 'Megalodon', 'Meganeura', 'Megatherium', 'Mesopithecus', 'Microraptor', 'Morellatops', 'Moschops', 'Mosasaurus', 'Oasisaur', 'Onyc', 'Oviraptor', 'Ovis', 'Pachy', 'Pachyrhinosaurus', 'Paraceratherium', 'Parasaur', 'Pegomastax', 'Pelagornis', 'Phiomia', 'Phoenix', 'Piranha', 'Plesiosaurus', 'Procoptodon', 'Pteranodon', 'Pulmonoscorpius', 'Purlovia', 'Pyromane', 'Quetzal', 'Raptor', 'Ravager', 'Reaper King', 'Rex', 'Rhyniognatha', 'Rock Drake', 'Roll Rat', 'Sabertooth', 'Sabertooth Salmon', 'Sarco', 'Shadowmane', 'Shastasaurus', 'Shinehorn', 'Sinomacrops', 'Snow Owl', 'Spino', 'Stegosaurus', 'Tapejara', 'Therizinosaur', 'Thorny Dragon', 'Thylacoleo', 'Titanoboa', 'Titanosaur', 'Troodon', 'Tropeognathus', 'Tusoteuthis', 'Velonasaur', 'Voidwyrm', 'Woolly Rhino', 'Wyvern', 'Xiphactinus', 'YiLing', 'Yeti', 'Yutyrannus'
-
+    'Achatina', 'Allosaurus', 'Amargasaurus', 'Andrewsarchus', 'Anglerfish', 'Ankylosaurus', 'Archaeopteryx', 'Argentavis', 'Arthropluera', 'Astrocetus', 'Astrodelphis', 'Baryonyx', 'Basilosaurus', 'Beelzebufo', 'Bloodstalker', 'Brontosaurus', 'Carnotaurus', 'Carbonemys', 'Castoroides', 'Carcharodontosaurus', 'Ceratosaurus', 'Chadlicotherium', 'Cnidaria', 'Compy', 'Cosmo', 'Daeodon', 'Deinosuchus', 'Deinonychus', 'Desmodus', 'Dimetrodon', 'Dimorphodon', 'Dinopithecus', 'Dilophosaur', 'Diplodocus', 'Dire Bear', 'Direwolf', 'Dodo', 'Doedicurus', 'Dunkleosteus', 'Electrophorus', 'Equus', 'Fasolasuchus', 'Featherlight', 'Fenrir', 'Ferox', 'Fjordhawk', 'Gacha', 'Gasbags', 'Gigantopithecus', 'Gigantoraptor', 'Giganotosaurus', 'Glowtail', 'Griffin', 'Hesperornis', 'Ichthyornis', 'Ichthyosaurus', 'Iguanodon', 'Kairuku', 'Kaprosuchus', 'Karkinos', 'Kentrosaurus', 'Leedsichthys', 'Liopleurodon', 'Lymantria', 'Lystrosaurus', 'Maewing', 'Magmasaur', 'Mammoth', 'Managarmr', 'Mantis', 'Megachelon', 'Megalosaurus', 'Megalania', 'Megaloceros', 'Megalodon', 'Meganeura', 'Megatherium', 'Mesopithecus', 'Microraptor', 'Morellatops', 'Moschops', 'Mosasaurus', 'Oasisaur', 'Onyc', 'Oviraptor', 'Ovis', 'Pachy', 'Pachyrhinosaurus', 'Paraceratherium', 'Parasaur', 'Pegomastax', 'Pelagornis', 'Phiomia', 'Phoenix', 'Piranha', 'Plesiosaurus', 'Procoptodon', 'Pteranodon', 'Pulmonoscorpius', 'Purlovia', 'Pyromane', 'Quetzal', 'Raptor', 'Ravager', 'Reaper King', 'Rex', 'Rhyniognatha', 'Rock Drake', 'Roll Rat', 'Sabertooth', 'Sabertooth Salmon', 'Sarco', 'Shadowmane', 'Shastasaurus', 'Shinehorn', 'Sinomacrops', 'Snow Owl', 'Spino', 'Stegosaurus', 'Tapejara', 'Therizinosaur', 'Thorny Dragon', 'Thylacoleo', 'Titanoboa', 'Titanosaur', 'Troodon', 'Tropeognathus', 'Tusoteuthis', 'Velonasaur', 'Voidwyrm', 'Woolly Rhino', 'Wyvern', 'Xiphactinus', 'YiLing', 'Yeti', 'Yutyrannus'
   ];
 
   return dinoNames.map((name, index) => ({
@@ -146,30 +145,36 @@ export const useDinoStore = create<DinoStore>((set, get) => ({
 
     if (image) {
       try {
+        // First update the local state immediately
+        set((state) => ({
+          collection: state.collection.map((dino) =>
+            dino.id === dinoId
+              ? {
+                  ...dino,
+                  categories: dino.categories.map((cat) =>
+                    cat.id === categoryId
+                      ? {
+                          ...cat,
+                          images: cat.images.filter((img) => img.id !== imageId),
+                        }
+                      : cat
+                  ),
+                }
+              : dino
+          ),
+        }));
+
+        // Then delete the image from storage
         await deleteImage(image.url);
+        
+        // Finally sync with the database
+        await get().syncCollection();
       } catch (error) {
         console.error('Error deleting image:', error);
+        // Revert the state if the deletion failed
+        await get().loadCollection();
       }
     }
-
-    set((state) => ({
-      collection: state.collection.map((dino) =>
-        dino.id === dinoId
-          ? {
-              ...dino,
-              categories: dino.categories.map((cat) =>
-                cat.id === categoryId
-                  ? {
-                      ...cat,
-                      images: cat.images.filter((img) => img.id !== imageId),
-                    }
-                  : cat
-              ),
-            }
-          : dino
-      ),
-    }));
-    await get().syncCollection();
   },
 
   syncCollection: async () => {
