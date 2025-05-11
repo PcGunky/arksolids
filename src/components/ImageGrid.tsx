@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Trash2, X } from 'lucide-react';
 import { DinoImage } from '../types/dino';
 
@@ -9,6 +9,24 @@ interface ImageGridProps {
 
 export const ImageGrid: React.FC<ImageGridProps> = ({ images, onRemoveImage }) => {
   const [selectedImage, setSelectedImage] = useState<DinoImage | null>(null);
+  const [isRemoving, setIsRemoving] = useState(false);
+
+  // Reset selected image when images prop changes
+  useEffect(() => {
+    setSelectedImage(null);
+  }, [images]);
+
+  const handleRemoveImage = async (e: React.MouseEvent, imageId: string) => {
+    e.stopPropagation();
+    if (isRemoving || !onRemoveImage) return;
+
+    setIsRemoving(true);
+    try {
+      await onRemoveImage(imageId);
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   return (
     <>
@@ -16,7 +34,7 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images, onRemoveImage }) =
         {images.map((image) => (
           <div key={image.id} className="relative group">
             <div 
-              onClick={() => setSelectedImage(image)}
+              onClick={() => !isRemoving && setSelectedImage(image)}
               className="cursor-pointer relative aspect-[5/3] bg-gray-900 rounded-lg overflow-hidden"
             >
               <img
@@ -31,11 +49,9 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images, onRemoveImage }) =
               {onRemoveImage && (
                 <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onRemoveImage(image.id);
-                    }}
-                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600"
+                    onClick={(e) => handleRemoveImage(e, image.id)}
+                    className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600 disabled:opacity-50"
+                    disabled={isRemoving}
                   >
                     <Trash2 size={16} />
                   </button>

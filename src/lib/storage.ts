@@ -5,7 +5,7 @@ export const uploadImage = async (file: File, userId: string): Promise<string> =
   const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
   const filePath = `${userId}/${fileName}`;
 
-  const { error: uploadError, data } = await supabase.storage
+  const { error: uploadError } = await supabase.storage
     .from('dino-images')
     .upload(filePath, file);
 

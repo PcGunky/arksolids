@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { DinoImage } from '../types/dino';
 import { uploadImage } from '../lib/storage';
 import { useAuthStore } from '../store/useAuthStore';
+import { useDinoStore } from '../store/useDinoStore';
 
 const MAX_FILE_SIZE = 1024 * 1024; // 1MB in bytes
 
@@ -102,6 +103,15 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
 
       const images = await Promise.all(uploadPromises);
       await addImages(dinoId, categoryId, images);
+      
+      // Clear state before closing
+      setSelectedFiles([]);
+      setColors({});
+      setError('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      
       onClose();
     } catch (error) {
       console.error('Error uploading images:', error);
@@ -111,13 +121,33 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
     }
   };
 
+  const handleClose = () => {
+    // Clear state before closing
+    setSelectedFiles([]);
+    setColors({});
+    setError('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    onClose();
+  };
+
+  // Cleanup function for image URLs
+  React.useEffect(() => {
+    return () => {
+      selectedFiles.forEach(file => {
+        URL.revokeObjectURL(URL.createObjectURL(file));
+      });
+    };
+  }, [selectedFiles]);
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
       <div className="bg-[#111111] rounded-lg p-6 w-full max-w-2xl border border-gray-800">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-semibold text-white">Upload Images</h3>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-1 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white"
           >
             <X size={20} />
@@ -170,7 +200,7 @@ export const CategoryUploadModal: React.FC<CategoryUploadModalProps> = ({
 
         <div className="flex justify-end gap-2">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="px-4 py-2 bg-gray-800 text-gray-300 rounded-md hover:bg-gray-700"
             disabled={uploading}
           >
