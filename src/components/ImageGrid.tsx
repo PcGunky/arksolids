@@ -11,7 +11,6 @@ export const ImageGrid: React.FC<ImageGridProps> = ({ images, onRemoveImage }) =
   const [selectedImage, setSelectedImage] = useState<DinoImage | null>(null);
   const [isRemoving, setIsRemoving] = useState(false);
 
-  // Reset selected image when images prop changes
   useEffect(() => {
     setSelectedImage(null);
   }, [images]);

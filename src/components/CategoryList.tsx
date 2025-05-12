@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Upload, Eye, Trash2 } from 'lucide-react';
 import { Dino, Category } from '../types/dino';
 import { useDinoStore } from '../store/useDinoStore';
@@ -11,17 +11,18 @@ interface CategoryListProps {
 
 export const CategoryList: React.FC<CategoryListProps> = ({ dino, onSelectCategory }) => {
   const { removeCategory } = useDinoStore();
-  const [uploadCategory, setUploadCategory] = useState<string | null>(null);
+  const [uploadCategory, setUploadCategory] = React.useState<string | null>(null);
 
   return (
     <div className="space-y-1">
       {dino.categories.map((category) => (
         <div
           key={category.id}
-          className="flex items-center justify-between p-2 bg-gray-900 rounded-md group"
+          className="flex items-center justify-between p-2 bg-gray-900 rounded-md group cursor-pointer hover:bg-gray-800"
+          onClick={() => onSelectCategory(dino, category)}
         >
           <span className="text-sm text-gray-300">{category.name}</span>
-          <div className="flex gap-1">
+          <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setUploadCategory(category.id)}
               className="p-1 text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded"

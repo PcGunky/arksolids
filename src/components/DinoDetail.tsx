@@ -3,6 +3,7 @@ import { SlidersHorizontal, Search } from 'lucide-react';
 import { Dino, Category } from '../types/dino';
 import { ImageGrid } from './ImageGrid';
 import { MissingColorsDisplay } from './MissingColorsDisplay';
+import { useDinoStore } from '../store/useDinoStore';
 
 interface DinoDetailProps {
   dino: Dino;
@@ -15,6 +16,7 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
   const [showFilter, setShowFilter] = useState(false);
   const [colorCheck, setColorCheck] = useState('');
   const [missingColors, setMissingColors] = useState<string[]>([]);
+  const collection = useDinoStore((state) => state.collection);
 
   useEffect(() => {
     setColorFilter('');
@@ -22,9 +24,14 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
     setMissingColors([]);
   }, [selectedCategory.id]);
 
-  const filteredImages = selectedCategory.images.filter((img) => {
+  // Get the latest category data from the store
+  const currentCategory = collection
+    .find(d => d.id === dino.id)
+    ?.categories.find(c => c.id === selectedCategory.id);
+
+  const filteredImages = (currentCategory?.images || []).filter((img) => {
     if (!colorFilter) return true;
-    return img.color.toLowerCase() === colorFilter.toLowerCase();
+    return img.color.toLowerCase().includes(colorFilter.toLowerCase());
   });
 
   const sortedImages = [...filteredImages].sort((a, b) => {
@@ -35,14 +42,18 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
       aNum - bNum;
   });
   
-  const uniqueColors = new Set(selectedCategory.images.map(img => img.color));
+  const uniqueColors = new Set(currentCategory?.images.map(img => img.color) || []);
   const colorCount = uniqueColors.size;
 
   const handleColorCheck = () => {
     const wantedColors = colorCheck.split(',').map(c => c.trim());
-    const existingColors = new Set(selectedCategory.images.map(img => img.color));
+    const existingColors = new Set(currentCategory?.images.map(img => img.color) || []);
     const missing = wantedColors.filter(color => !existingColors.has(color));
     setMissingColors(missing);
+  };
+
+  const handleRemoveImage = async (imageId: string) => {
+    await onRemoveImage(selectedCategory.id, imageId);
   };
 
   return (
@@ -103,7 +114,7 @@ export const DinoDetail: React.FC<DinoDetailProps> = ({ dino, selectedCategory, 
       <div className="overflow-x-hidden">
         <ImageGrid
           images={sortedImages}
-          onRemoveImage={(imageId) => onRemoveImage(selectedCategory.id, imageId)}
+          onRemoveImage={handleRemoveImage}
         />
       </div>
     </div>

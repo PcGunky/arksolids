@@ -69,21 +69,19 @@ export const CollectionList: React.FC<CollectionListProps> = ({
       <div className="space-y-1 max-h-[calc(100vh-12rem)] overflow-y-auto">
         {filteredDinos.map((dino) => (
           <div key={dino.id} className="rounded-lg overflow-hidden">
-            <div className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg cursor-pointer">
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => toggleExpand(dino.id)}
-                  className="p-1 hover:bg-gray-700 rounded"
-                >
-                  {expandedDinos.has(dino.id) ? (
-                    <ChevronDown size={16} className="text-gray-400" />
-                  ) : (
-                    <ChevronRight size={16} className="text-gray-400" />
-                  )}
-                </button>
+            <div 
+              className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-lg cursor-pointer"
+              onClick={() => toggleExpand(dino.id)}
+            >
+              <div className="flex items-center gap-2 flex-1">
+                {expandedDinos.has(dino.id) ? (
+                  <ChevronDown size={16} className="text-gray-400" />
+                ) : (
+                  <ChevronRight size={16} className="text-gray-400" />
+                )}
                 <span className="text-gray-200">{dino.name}</span>
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => setShowNewCategory(dino.id)}
                   className="p-1 text-gray-400 hover:text-blue-400 hover:bg-gray-700 rounded"
